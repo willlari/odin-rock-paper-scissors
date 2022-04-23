@@ -1,3 +1,4 @@
+//This function generates a random play for computer
 function computerPlay(){
     let playId = Math.random()*3;
     let play ='';
@@ -12,13 +13,8 @@ function computerPlay(){
 return play;
 }
 
-function playerPlay(){
-    let play = prompt("what do you play?");
-    let lowerCasePlay = play.toLowerCase();
-    return lowerCasePlay;
-}
+function playGame(computerPlay, playerPlay, userScore, computerScore){
 
-function playGame(computerPlay, playerPlay){
     let message = "YOU LOOSE!";
     if(computerPlay == playerPlay){
         message = "IT'S A TIE!"
@@ -37,63 +33,58 @@ function playGame(computerPlay, playerPlay){
             }
         }
     }
-    console.log(message);
+    return message;
 }
-
-function game(repetition){
-    for(let i = 0; i < repetition; i++){
-        playGame(computerPlay(), playerPlay());
-    }
-}
-function newGame(){
-    playGame(computerPlay(), playerPlay());
-}
-
-//game(5)
-
-//TEstint DOM 
-
-const container = document.querySelector('#container');
-
-const content = document.createElement('div');
-content.classList.add('content');
-content.textContent = "This is some text";
-
-container.appendChild(content);
-
-const contentRed = document.createElement('p');
-contentRed.classList.add('contentRed');
-contentRed.textContent = "I am red text";
-contentRed.style.color = "red";
-container.appendChild(contentRed);
-
-const h3Blue = document.createElement('div');
-h3Blue.classList.add('h3Blue');
-h3Blue.textContent = "Blue H3";
-h3Blue.style.color = "blue";
-h3Blue.style.background = "red";
-container.appendChild(h3Blue);
-
-const division = document.createElement('div');
-division.style.background = "purple";
-
-const textDiv = document.createElement('h1');
-textDiv.textContent="je suis le textDiv"
-
-
-const pDiv = document.createElement('p');
-pDiv.textContent="je suis le sous texte de textDiv"
-division.appendChild(textDiv);
-division.appendChild(pDiv);
-
-container.appendChild(division);
-
-
 
 //TESTING BUTTON NEW GAME
+let message;
+let userScore =0;
+let computerScore =0;
 
-const btn = document.querySelector('#btn');
-btn.addEventListener('click', newGame);
-btn.style.background='red';
+const btnRock = document.querySelector('#btnRock');
+btnRock.addEventListener('click', () =>{
+    message = playGame(computerPlay(), "rock", userScore, computerScore);
+    attributeScore(message);
+});
+const btnPaper = document.querySelector('#btnPaper');
+btnPaper.addEventListener('click', () =>{
+    message =  playGame(computerPlay(), "paper");
+    attributeScore(message);
+});
+const btnScissors = document.querySelector('#btnScissors');
+btnScissors.addEventListener('click', () =>{
+    message = playGame(computerPlay(), "scissors");
+    attributeScore(message);
+});
+
+function attributeScore(message){
+    if (message == "YOU LOOSE!"){
+        computerScore ++;
+    } else if ( message = "YOU WIN!"){
+        userScore ++;
+    }
+    printScore();
+}
+
+
+function printScore(){
+    const divUserScore = document.getElementById('divUserScore');
+    const divCompuScore = document.getElementById('divCompuScore');
+
+    divCompuScore.textContent = "Computer :: " +computerScore.toString();
+    divUserScore.textContent = "User :" + userScore.toString();
+ 
+}
+    
+
+function printMessage(){
+    const results = document.querySelector("#results" );
+    const res = document.createElement('div');
+    res.textContent = message;
+    results.appendChild(res);
+}
+
+
+
 
 
