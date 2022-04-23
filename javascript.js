@@ -56,6 +56,12 @@ btnScissors.addEventListener('click', () =>{
     message = playGame(computerPlay(), "scissors");
     attributeScore(message);
 });
+const btnNew = document.querySelector('#btnNew');
+btnNew.addEventListener('click', () =>{
+    computerScore=0;
+    userScore=0;
+    printScore();
+});
 
 function attributeScore(message){
     if (message == "YOU LOOSE!"){
@@ -71,8 +77,8 @@ function printScore(){
     const divUserScore = document.getElementById('divUserScore');
     const divCompuScore = document.getElementById('divCompuScore');
 
-    divCompuScore.textContent = "Computer :: " +computerScore.toString();
-    divUserScore.textContent = "User :" + userScore.toString();
+    divCompuScore.textContent = + computerScore.toString();
+    divUserScore.textContent = + userScore.toString();
  
 }
     
